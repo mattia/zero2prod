@@ -1,0 +1,12 @@
+{
+  "actions" : {
+    "build" : {
+      "enabled" : true,
+      "script" : "cargo build"
+    },
+    "run" : {
+      "enabled" : true,
+      "script" : "cargo run"
+    }
+  }
+}
