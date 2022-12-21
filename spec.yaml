@@ -1,0 +1,27 @@
+#! spec.yaml
+name: zero2prod
+region: fra # Frankfurt (Germany - EU)
+services:
+  - name: zero2prod
+    # Relative to the repository root
+    dockerfile_path: Dockerfile
+    source_dir: .
+    github:
+      branch: feature/chapter-5 #change before merging
+      # Deploy a new version on every commit to `main`!
+      # CD _here we come!_
+      deploy_on_push: true
+      repo: mattia/zero2prod
+    # Active probe used by DigitalOCean to ensure our application is healthy
+    health_check:
+      http_path: /health_check
+    # The port the application will be listening on for incoming requests
+    # It should match what we specified in our `configuration/production.yaml` file!
+    http_port: 8000
+    # For production workloads we'd go for at least two!
+    # But let's try to keep the bill under control
+    instance_count: 1
+    instance_size_slug: basic-xxs
+    # All incoming requests should be routed to out app
+    routes:
+      - path: /
